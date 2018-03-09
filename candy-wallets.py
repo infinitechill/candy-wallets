@@ -42,7 +42,7 @@ private_key=priv.to_string().hex()
 public_key=pub.hex()
 
 address_code = pyqrcode.create("0x"+address, error='L', version=27, mode='binary')
-address_code.png('code.png', scale=2, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xcc])
+address_code.png('code.png', scale=2, module_color=[0, 0, 0, 128], background=[0xff, 0xff, 0xff])
 #address_code.show()
 
 qr_code_file='code.png'
@@ -53,7 +53,7 @@ logo_path = os.path.expanduser('logo.png')
 im = Image.open(qr_code_file)
 qr_width, qr_height = im.size
 
-canvas = canvas.Canvas("form.pdf", pagesize=landscape(letter))
+canvas = canvas.Canvas("candy-wallet.pdf", pagesize=landscape(letter))
 
 canvas.setFillColor((HexColor("#ab20fd")))
 
@@ -67,8 +67,6 @@ canvas.drawPath(path,True,True)
 canvas.setLineWidth(.9)
 canvas.setFont('Helvetica', 10)
 canvas.setFillColorRGB(32,5,137)
-
-#canvas.drawInlineImage('image.png', 0,0, width=500,height=200) 
 
 canvas.drawString(35,550,'Address:')
 canvas.drawString(35,540,address)
@@ -86,6 +84,3 @@ canvas.drawInlineImage('code.png', qr_width*scaler+qr_width*scaler+25,250, width
 
 canvas.save()
 
-pdf = "form.pdf"
-previewPath = r'/Applications/Preview.app'
-subprocess.Popen([previewPath, pdf])
